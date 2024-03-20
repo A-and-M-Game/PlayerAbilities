@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "playerabilities",
+  "version": "${version}",
+
+  "name": "PlayerAbilities",
+  "description": "Adds unlockable abilities players can use for combat and better movement",
+  "authors": [
+    "Michael"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "MIT License",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.michael.playerabilities.PlayerAbilities"
+    ],
+    "client": [
+      "net.michael.playerabilities.PlayerAbilitiesClient"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
