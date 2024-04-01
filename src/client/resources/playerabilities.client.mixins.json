@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "kerbal.playerabilities.mixin",
+	"package": "kerbal.playerabilities.mixin.client",
 	"compatibilityLevel": "JAVA_17",
-	"mixins": [
-		"ExampleMixin"
+	"client": [
+		"ExampleClientMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
