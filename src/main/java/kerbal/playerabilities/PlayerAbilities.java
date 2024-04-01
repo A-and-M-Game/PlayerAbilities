@@ -12,10 +12,12 @@ import org.slf4j.LoggerFactory;
 public class PlayerAbilities implements ModInitializer {
     public static final String modId = "playerabilities";
     public static final Logger LOGGER = LoggerFactory.getLogger(modId);
+    public static final int spellCount = 5;
 
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Beginning " + modId + " initialization...");
+        PlayerAbilityPackets.register();
         LOGGER.info("Finished " + modId + " initialization!");
 	}
 }
