@@ -18,10 +18,19 @@ public final class PlayerAbiltiesComponents implements EntityComponentInitialize
             return new ManaComponent(o);
         }
     }
+
+    private class SpellsComponentFactory implements ComponentFactory {
+        @Override
+        public Component createComponent(Object o) {
+            return new SpellsComponent();
+        }
+    }
     public static final ComponentKey<ManaComponent> MANA = ComponentRegistry.getOrCreate(new Identifier(PlayerAbilities.modId, "mana"), ManaComponent.class);
+    public static final ComponentKey<SpellsComponent> SPELLS = ComponentRegistry.getOrCreate(new Identifier(PlayerAbilities.modId, "spells"), SpellsComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-        registry.registerForPlayers(MANA, new ManaComponentFactory());
+        registry.registerForPlayers(MANA, new ManaComponentFactory(), RespawnCopyStrategy.INVENTORY);
+        registry.registerForPlayers(SPELLS, new SpellsComponentFactory(), RespawnCopyStrategy.INVENTORY);
     }
 }
