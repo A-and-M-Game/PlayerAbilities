@@ -3,6 +3,8 @@ package kerbal.playerabilities.component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import kerbal.playerabilities.PlayerAbilities;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public class SpellsComponent implements MultiStringComponent, AutoSyncedComponent {
     public String[] spells;
@@ -34,5 +36,20 @@ public class SpellsComponent implements MultiStringComponent, AutoSyncedComponen
     @Override
     public void setValue(int i, String str) {
         spells[i] = str;
+    }
+
+    @Override
+    public void writeSyncPacket(PacketByteBuf buf, ServerPlayerEntity player) {
+        String totalString = "";
+        for (String str : spells) {
+            totalString += str + " ";
+        }
+        buf.writeString(totalString);
+    }
+
+    @Override
+    public void applySyncPacket(PacketByteBuf buf) {
+        String totalString = buf.readString();
+        spells = totalString.split(" ");
     }
 }

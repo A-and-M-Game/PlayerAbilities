@@ -1,11 +1,12 @@
 package kerbal.playerabilities;
 
-import dev.onyxstudios.cca.api.v3.component.ComponentKey;
-import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
-import kerbal.playerabilities.component.ManaComponent;
+import kerbal.playerabilities.networking.PlayerAbilityPackets;
+import kerbal.playerabilities.spell.Spell;
+import kerbal.playerabilities.spell.SpellRegisterCallback;
+import kerbal.playerabilities.spell.UpdraftSpell;
 import net.fabricmc.api.ModInitializer;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.util.TypedActionResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +18,16 @@ public class PlayerAbilities implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Beginning " + modId + " initialization...");
-        PlayerAbilityPackets.register();
+        PlayerAbilityPackets.registerC2SPackets();
+        PlayerAbilityPackets.registerS2CPackets();
+        registerSpell(new UpdraftSpell());
         LOGGER.info("Finished " + modId + " initialization!");
 	}
+
+    public void registerSpell(Spell spell) {
+        SpellRegisterCallback.EVENT.register(name -> {
+            if (name == spell.getName()) return TypedActionResult.success(spell);
+            return TypedActionResult.pass(null);
+        });
+    }
 }

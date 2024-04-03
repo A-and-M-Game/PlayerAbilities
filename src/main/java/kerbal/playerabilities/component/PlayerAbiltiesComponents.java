@@ -30,7 +30,7 @@ public final class PlayerAbiltiesComponents implements EntityComponentInitialize
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-        registry.registerForPlayers(MANA, new ManaComponentFactory());
-        registry.registerForPlayers(SPELLS, new SpellsComponentFactory());
+        registry.registerForPlayers(MANA, new ManaComponentFactory(), RespawnCopyStrategy.INVENTORY);
+        registry.registerForPlayers(SPELLS, new SpellsComponentFactory(), RespawnCopyStrategy.INVENTORY);
     }
 }
